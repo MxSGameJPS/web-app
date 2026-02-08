@@ -65,13 +65,6 @@ export default function Sidebar({
         </select>
       </div>
 
-      <button
-        className="btn btn-primary"
-        onClick={handleChange}
-        style={{ display: "none" }}
-      >
-        Aplicar Filtros (Auto)
-      </button>
       <button className="btn btn-secondary" onClick={handleClear}>
         Limpar
       </button>

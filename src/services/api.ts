@@ -47,6 +47,8 @@ export interface User {
   user_metadata: {
     role: string;
   };
+  name?: string;
+  created_at?: string;
 }
 
 class ClientAPIService {
