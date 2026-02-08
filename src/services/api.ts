@@ -86,20 +86,34 @@ class ClientAPIService {
   }
 
   async signInWithPassword({ email, password }: any) {
-    if (this.isMock || !this.supabase) return this.mockSignIn(email, password);
+    // Prioritize Custom Backend API (since users are in public tables, not Supabase Auth)
+    // "mockSignIn" logic was actually calling the real Backend API.
+    const apiLogin = await this.signInWithApi(email, password);
 
-    try {
-      const { data, error } = await this.supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (error) throw error;
-      return { data, error: null };
-    } catch (error) {
-      console.warn("Login falhou, tentando mock se for erro de rede...");
-      // Fallback to mock for demo purposes if network fails
-      return this.mockSignIn(email, password);
+    // If API login succeeds, return it
+    if (!apiLogin.error) {
+      return apiLogin;
     }
+
+    // Fallback to Supabase Auth only if API fails and Supabase is available
+    if (!this.isMock && this.supabase) {
+      try {
+        console.log(
+          "⚠️ Backend login failed, trying Supabase Auth fallback...",
+        );
+        const { data, error } = await this.supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (error) throw error;
+        return { data, error: null };
+      } catch (error) {
+        // Return the original API error if Supabase also fails
+        return apiLogin;
+      }
+    }
+
+    return apiLogin;
   }
 
   async signOut() {
@@ -168,8 +182,9 @@ class ClientAPIService {
     if (!res.ok) throw new Error("Erro ao remover usuário");
   }
 
-  private async mockSignIn(email: string, password: string) {
-    console.log("🔐 Tentando login via API...");
+  // Renamed from mockSignIn to reflect reality (It calls the actual API)
+  private async signInWithApi(email: string, password: string) {
+    console.log("🔐 Tentando login via API Backend...");
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -188,10 +203,11 @@ class ClientAPIService {
         };
       }
     } catch (err) {
-      console.error("Erro no login:", err);
+      console.error("Erro no login API:", err);
+      // Network error?
       return {
         data: { user: null, session: null },
-        error: { message: "Erro de conexão" },
+        error: { message: "Erro de conexão com servidor" },
       };
     }
   }
