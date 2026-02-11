@@ -172,6 +172,9 @@ export default function DirectorDashboard({ user }: { user: User }) {
                   borderRadius: "8px",
                   overflow: "hidden",
                   boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+                  maxHeight: "calc(100vh - 200px)",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 {/* Barra Superior do Modo Supervisão */}
@@ -183,6 +186,7 @@ export default function DirectorDashboard({ user }: { user: User }) {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
+                    flexShrink: 0,
                   }}
                 >
                   <span style={{ fontSize: "1rem", fontWeight: 500 }}>
@@ -193,7 +197,13 @@ export default function DirectorDashboard({ user }: { user: User }) {
                   </span>
                 </div>
 
-                <div style={{ padding: "0px", background: "#f4f7f6" }}>
+                <div
+                  style={{
+                    overflowY: "auto",
+                    flex: 1,
+                    background: "#f4f7f6",
+                  }}
+                >
                   {/* Reuse ManagerDashboard but pass targetUser */}
                   <ManagerDashboard user={user} targetUser={selectedManager} />
                 </div>

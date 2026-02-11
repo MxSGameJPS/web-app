@@ -122,6 +122,40 @@ export default function ManagerDashboard({
     className: c.porte?.toLowerCase() || "pequeno",
   }));
 
+  // Modo Supervisão (quando renderizado dentro de outro dashboard)
+  const isSupervisionMode = !!targetUser;
+
+  if (isSupervisionMode) {
+    return (
+      <div style={{ padding: "1rem", background: "#f8f9fa" }}>
+        <KPICards clients={filteredClients} />
+
+        <Charts clients={filteredClients} />
+
+        <Calendar events={events} />
+
+        {typeof window !== "undefined" && (
+          <Map clients={filteredClients} center={mapCenter} />
+        )}
+
+        <ClientTable
+          clients={filteredClients}
+          onEdit={handleEditClient}
+          onDelete={handleDeleteClient}
+          onLocate={handleLocateClient}
+        />
+
+        <ClientModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSaveClient}
+          client={editingClient}
+        />
+      </div>
+    );
+  }
+
+  // Modo Normal (dashboard completo)
   return (
     <div style={{ minHeight: "100vh", background: "var(--background-color)" }}>
       <Header />
