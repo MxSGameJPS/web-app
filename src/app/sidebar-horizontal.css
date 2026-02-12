@@ -1,6 +1,13 @@
 /* CSS Responsivo para Sidebar Horizontal (Telas até 1412px) */
 
 @media (max-width: 1412px) {
+  /* Garantir que sticky funcione removendo overflow hidden de ancestrais */
+  html,
+  body {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
   /* Forçar layout de coluna única no grid principal */
   body .dashboard-grid,
   .dashboard-grid {
@@ -8,9 +15,10 @@
     flex-direction: column !important;
     gap: 0 !important;
     padding: 0 !important;
+    overflow: visible !important; /* Necessário para sticky */
   }
 
-  /* Sidebar transformada em Navbar Horizontal */
+  /* Sidebar transformada em Navbar Horizontal Fixa */
   body .sidebar,
   .sidebar {
     width: 100% !important;
@@ -22,7 +30,7 @@
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
-    color: rgb(255, 255, 255) !important;
+    color: var(--text-color) !important;
 
     /* Flexbox layout */
     display: flex !important;
@@ -32,13 +40,15 @@
     flex-wrap: wrap !important;
     gap: 1.5rem !important;
 
-    /* Posicionamento */
+    /* Posicionamento Sticky Header */
+    position: -webkit-sticky !important;
     position: sticky !important;
     top: 0 !important;
-    z-index: 999 !important;
+    z-index: 9999 !important;
     margin: 0 !important;
     transform: none !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: none !important; /* Evitar comportamentos estranhos na rolagem */
   }
 
   /* Remover efeitos de hover da sidebar vertical */
@@ -125,7 +135,7 @@
 
   .btn-sidebar.active {
     background: var(--primary-color) !important;
-    color: rgb(0, 0, 0) !important;
+    color: white !important;
     border-color: var(--primary-color) !important;
   }
 
@@ -155,7 +165,7 @@
   text-align: left;
   border: 1px solid transparent;
   background: transparent;
-  color: rgb(0, 0, 0);
+  color: var(--text-color);
   width: 100%;
   margin-bottom: 0.5rem;
 }
