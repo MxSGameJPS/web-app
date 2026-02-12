@@ -1,4 +1,7 @@
 import "./globals.css";
+import "./theme-adjustments.css";
+import "./chart-styles.css";
+import "./sidebar-horizontal.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 
 export const metadata = {

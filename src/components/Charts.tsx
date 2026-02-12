@@ -49,7 +49,8 @@ export default function Charts({ clients }: { clients: Client[] }) {
       {
         data: labels.map((l) => porteCounts[l]),
         backgroundColor: colors,
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: "#ffffff",
       },
     ],
   };
@@ -61,16 +62,75 @@ export default function Charts({ clients }: { clients: Client[] }) {
         label: "Faturamento YTD (R$)",
         data: labels.map((l) => porteRevenue[l]),
         backgroundColor: colors,
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: "#ffffff",
       },
     ],
   };
 
-  const options = {
+  const options: any = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
-      legend: { position: "top" as const },
+      legend: {
+        position: "top" as const,
+        labels: {
+          color: "#ffffff",
+          font: {
+            size: 13,
+            weight: 600,
+          },
+          padding: 12,
+          boxWidth: 12,
+          boxHeight: 12,
+        },
+        align: "center" as const,
+        fullSize: true,
+      },
       title: { display: false },
+      tooltip: {
+        backgroundColor: "rgba(0, 0, 0, 0.9)",
+        titleColor: "#ffffff",
+        bodyColor: "#ffffff",
+        borderColor: "rgba(255, 255, 255, 0.3)",
+        borderWidth: 1,
+        titleFont: {
+          size: 14,
+          weight: 700,
+        },
+        bodyFont: {
+          size: 13,
+        },
+        padding: 12,
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          color: "#ffffff",
+          font: {
+            size: 13,
+            weight: 600,
+          },
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.1)",
+          borderColor: "rgba(255, 255, 255, 0.2)",
+        },
+      },
+      x: {
+        ticks: {
+          color: "#ffffff",
+          font: {
+            size: 13,
+            weight: 600,
+          },
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.05)",
+          borderColor: "rgba(255, 255, 255, 0.2)",
+        },
+      },
     },
   };
 

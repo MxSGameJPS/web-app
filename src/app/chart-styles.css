@@ -1,0 +1,39 @@
+/* Ajustes para legibilidade dos gráficos Chart.js */
+
+/* Cores dos textos nos gráficos */
+.chart-card canvas {
+  color: #ffffff !important;
+}
+
+/* Labels e legendas do Chart.js */
+.chart-card .chartjs-render-monitor {
+  color: #ffffff;
+}
+
+/* Forçar cores claras em todos os textos do Chart.js */
+canvas {
+  color: #ffffff;
+}
+
+/* Legendas do gráfico */
+.chart-card legend,
+.chart-card .legend {
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
+
+/* Labels dos eixos */
+.chart-card .chartjs-axis-label {
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+}
+
+/* Tooltips */
+.chart-card .chartjs-tooltip {
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: #ffffff !important;
+  font-size: 0.9rem !important;
+  padding: 0.5rem !important;
+  border-radius: 4px !important;
+}

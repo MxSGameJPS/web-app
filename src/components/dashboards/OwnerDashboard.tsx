@@ -319,53 +319,21 @@ IMPACTO ESPERADO:
     <div style={{ minHeight: "100vh", background: "#f8f9fa", color: "#333" }}>
       <Header />
 
-      <div style={styles.dashboardContainer}>
+      <div className="dashboard-grid">
         {/* Sidebar */}
-        <aside style={styles.sidebar}>
-          <h2
-            style={{
-              fontSize: "1.2rem",
-              marginBottom: "1.5rem",
-              color: "#2a9d8f",
-              borderBottom: "2px solid #eee",
-              paddingBottom: "10px",
-            }}
-          >
-            Painel do Dono
-          </h2>
+        <aside className="sidebar">
+          <h2 className="sidebar-title">Painel do Dono</h2>
 
-          <nav
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              marginBottom: "2rem",
-            }}
-          >
+          <nav className="sidebar-nav">
             <button
               onClick={() => setCurrentView("dashboard")}
-              style={{
-                ...styles.btn,
-                marginTop: 0,
-                background:
-                  currentView === "dashboard" ? "#2a9d8f" : "transparent",
-                color: currentView === "dashboard" ? "white" : "#555",
-                border: currentView === "dashboard" ? "none" : "1px solid #ddd",
-                textAlign: "left",
-              }}
+              className={`btn-sidebar ${currentView === "dashboard" ? "active" : ""}`}
             >
               📊 Análise de Visitas
             </button>
             <button
               onClick={() => setCurrentView("team")}
-              style={{
-                ...styles.btn,
-                marginTop: 0,
-                background: currentView === "team" ? "#2a9d8f" : "transparent",
-                color: currentView === "team" ? "white" : "#555",
-                border: currentView === "team" ? "none" : "1px solid #ddd",
-                textAlign: "left",
-              }}
+              className={`btn-sidebar ${currentView === "team" ? "active" : ""}`}
             >
               👥 Gestão de Equipe
             </button>
@@ -374,15 +342,7 @@ IMPACTO ESPERADO:
                 setCurrentView("wallets");
                 setSelectedManager(null);
               }}
-              style={{
-                ...styles.btn,
-                marginTop: 0,
-                background:
-                  currentView === "wallets" ? "#2a9d8f" : "transparent",
-                color: currentView === "wallets" ? "white" : "#555",
-                border: currentView === "wallets" ? "none" : "1px solid #ddd",
-                textAlign: "left",
-              }}
+              className={`btn-sidebar ${currentView === "wallets" ? "active" : ""}`}
             >
               📂 Visão Geral de Carteiras
             </button>
@@ -428,7 +388,7 @@ IMPACTO ESPERADO:
         </aside>
 
         {/* Conteúdo Principal */}
-        <main style={styles.content}>
+        <main className="content">
           {currentView === "team" ? (
             <ManagerManagement />
           ) : currentView === "wallets" ? (
